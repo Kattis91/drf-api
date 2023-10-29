@@ -17,15 +17,14 @@ class CommentSerializer(serializers.ModelSerializer):
         return request.user == obj.owner
 
     class Meta:
-        model = Post
+        model = Comment
         fields = [
-            'id', 'owner', 'is_owner', 'profile_id',
-            'profile_image', 'created_at', 'updated_at',
-            'title', 'content'
+            'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
+            'post', 'created_at', 'updated_at', 'content'
         ]
 
-    
-class CommentDetailSerializer(serializers.CommentSerializer):
+
+class CommentDetailSerializer(CommentSerializer):
     """
     Serializer for the Comment model used in Detail view
     Post is a read only field so that we dont have to set it on each update
