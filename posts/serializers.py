@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Profile
+from .models import Post
 
 
-class ProfileSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
@@ -17,7 +17,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             )
         if value.image.width > 4096:
             raise serializers.ValidationError(
-                'Image wifth larger than 4096px!'
+                'Image width larger than 4096px!'
             )
         return value
 
